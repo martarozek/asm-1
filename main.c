@@ -58,14 +58,18 @@ int main() {
         for (int y = 0; y < brd.w; ++y)
             scanf("%hhu", brd.mem + brd.w*x + y);
 
-    for (int x = 0; x < brd.h; ++x)
-        for (int y = 0; y < brd.w; ++y)
-            evolve(brd, x, y);
+    int steps = 0;
+    scanf("%d", &steps);
 
-    for (int x = 0; x < brd.h; ++x)
-        for (int y = 0; y < brd.w; ++y)
-            *(brd.mem + brd.w*x + y) >>= 1;
+    for (int i = 0; i < steps; ++i) {
+        for (int x = 0; x < brd.h; ++x)
+            for (int y = 0; y < brd.w; ++y)
+                evolve(brd, x, y);
 
+        for (int x = 0; x < brd.h; ++x)
+            for (int y = 0; y < brd.w; ++y)
+                *(brd.mem + brd.w*x + y) >>= 1;
+    }
     print(brd);
 
     free(brd.mem);
