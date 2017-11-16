@@ -1,5 +1,5 @@
-game_of_life: main.c gol.o
-	gcc -std=c99 -g -Wall -o game_of_life main.c gol.o
+game_of_life: main.c start_run.o
+	gcc -std=c99 -g -Wall -o game_of_life main.c start_run.o
 
 .SECONDARY:
 
