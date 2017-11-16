@@ -13,15 +13,26 @@ struct board {
 };
 
 void print(struct board brd) {
+    for (int x = 0; x < brd.w; ++x)
+        printf("--");
+    printf("-\n");
     for (int x = 0; x < brd.h; ++x) {
+        printf("|");
         for (int y = 0; y < brd.w; ++y) {
-            printf("%hhu", *(brd.mem + brd.w * x + y));
+            if (*(brd.mem + brd.w * x + y))
+                printf("x");
+            else
+                printf(" ");
+
             if (y < brd.w - 1)
                 printf(" ");
             else
-                printf("\n");
+                printf("|\n");
         }
     }
+    for (int x = 0; x < brd.w; ++x)
+        printf("--");
+    printf("-\n");
 }
 
 int main() {
@@ -45,7 +56,7 @@ int main() {
     int steps = 0;
     scanf("%d", &steps);
 
-    if (steps) {
+    if (steps > 0) {
         start(brd.w, brd.h, (char *) brd.mem);
         run(steps);
     }
