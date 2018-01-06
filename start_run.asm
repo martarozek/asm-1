@@ -7,19 +7,17 @@ T:      resb 8
         global run, start
 
 start:
-        push rbp
-
         mov  [w], rdi
         mov  [h], rsi
         mov  [T], rdx
 
-        pop  rbp
         ret
 
 ;; numer of steps in rdi
 run:
-        push rbp
-        mov  rbp, rsp
+        push rbx
+        push r12
+        push r13
 
         mov rbx, [T]    ; get array base address
 
@@ -57,7 +55,9 @@ l5:                     ; loop over width
         dec edi         ; step counter
         jnz l1
 
-        pop  rbp
+        pop  r13
+        pop  r12
+        pop  rbx
         ret
 
 evolve:
@@ -119,7 +119,7 @@ test:
         and r13b, 1     ; ...&& I'm alive
         jz evolve_done
 revive:
-        or r13b, 1 << 1 ; x |= (1 << 1)
+        or r13b, 2 ;    x |= (1 << 1)
         mov [rbx + rax], r13b
 evolve_done:
         ret
